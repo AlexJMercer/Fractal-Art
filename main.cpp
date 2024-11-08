@@ -11,8 +11,7 @@ int main(int argc, char *argv[])
     if (argc == 2)
         SAMPLES = std::stoi(argv[1]);
     else {
-        std::cout << "Usage: " << argv[0] << " [samples]" << std::endl;
-        exit(1);
+        SAMPLES = 128;
     }
 
     Fractals fractal(SAMPLES, WIDTH, HEIGHT);
