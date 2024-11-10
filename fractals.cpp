@@ -18,6 +18,14 @@ Fractals::Fractals(uint32_t SAMPLES, uint32_t WIDTH, uint32_t HEIGHT)
     palette.generateGradientPalette();
 }
 
+Fractals::~Fractals()
+{
+    for (auto &t : threads)
+        t.detach();
+        
+    threads.clear();
+}
+
 
 void Fractals::calculateFractal(sf::Image &image)
 {
@@ -54,10 +62,6 @@ void Fractals::calculateFractal(sf::Image &image)
         }
     };
 
-    const uint32_t numThreads = std::thread::hardware_concurrency();
-    std::vector<std::thread> threads;
-    uint32_t rowsPerThread = HEIGHT / numThreads;
-
     for (uint32_t i = 0; i < numThreads; ++i)
     {
         uint32_t startY = i * rowsPerThread;
@@ -66,9 +70,9 @@ void Fractals::calculateFractal(sf::Image &image)
     }
 
     for (auto &t : threads)
-    {
-        t.join();
-    }
+        if (t.joinable())
+            t.join();
+
 }
 
 void Fractals::run()

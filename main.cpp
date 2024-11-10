@@ -16,6 +16,6 @@ int main(int argc, char *argv[])
 
     Fractals fractal(SAMPLES, WIDTH, HEIGHT);
     fractal.run();
-
+    
     return 0;
 }
