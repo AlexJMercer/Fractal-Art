@@ -1,21 +1,23 @@
 #include <iostream>
+#include <string>
 
-#include "fractals.cpp"
+#include "fractals.hpp"
 
-int main(int argc, char *argv[])
+int main(int argc, char **argv)
 {
-    uint32_t WIDTH = 1920;  // Default width
-    uint32_t HEIGHT = 1080; // Default height
-    uint32_t SAMPLES = 128; // Default samples
+    uint32_t width = 1920;  // Default width
+    uint32_t height = 1080; // Default height
+    uint32_t samples = 128; // Default samples
 
     if (argc == 2)
-        SAMPLES = std::stoi(argv[1]);
+        samples = std::stoi(argv[1]);
     else {
-        SAMPLES = 128;
+        samples = 128;
     }
 
-    Fractals fractal(SAMPLES, WIDTH, HEIGHT);
-    fractal.run();
+    Fractals fractal(samples, width, height);
+    // fractal.run();
+    fractal.calculateCUDA();
     
     return 0;
 }

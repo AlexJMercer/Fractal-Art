@@ -1,11 +1,13 @@
-#ifndef FRACTALS_H_
-#define FRACTALS_H_
+#pragma once
 
 #include <SFML/Graphics.hpp>
+
+#include <device_launch_parameters.h>
 
 #include "color.hpp"
 
 #include <thread>
+#include <string>
 #include <vector>
 #include <complex>
 #include <cmath>
@@ -23,11 +25,12 @@ public:
     void calculateFractal(sf::Image &);
 
     // For CUDA
-    // void test();
+    void calculateCUDA();
 
 private:
     ColorPalette palette;
 
+    uint32_t SAMPLES;
     uint32_t WIDTH;
     uint32_t HEIGHT;
 
@@ -36,7 +39,7 @@ private:
     // Initialize Multi-threading
     const uint32_t numThreads = std::thread::hardware_concurrency();
     std::vector<std::thread> threads;
-    uint32_t rowsPerThread = HEIGHT / numThreads;
+    const uint32_t rowsPerThread = HEIGHT / numThreads;
 
 
     // Variables for the Fractal rendering window
@@ -51,5 +54,3 @@ private:
     double deltaY;
 };
 
-
-#endif // FRACTALS_H_
