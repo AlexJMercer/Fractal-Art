@@ -14,12 +14,6 @@ set(CMAKE_CUDA_ARCHITECTURES 75)
 set(SFML_DIR "C:/SFML-2.6.2/lib/cmake/SFML") 
 find_package(SFML 2.5 COMPONENTS system window graphics audio network REQUIRED)
 
-# Find OpenGL
-find_package(OpenGL REQUIRED)
-
-# Include directories
-include_directories(${SFML_INCLUDE_DIR} ${OPENGL_INCLUDE_DIR})
-
 # Set executables
 set(SOURCE_FILES main.cpp color.cpp fractals.cpp fractalCUDA.cu)
 
@@ -29,7 +23,6 @@ add_executable(Fractals ${SOURCE_FILES})
 # Link SFML and OpenGL libraries
 target_link_libraries(Fractals
     sfml-system sfml-window sfml-graphics sfml-audio sfml-network
-    OpenGL::GL
     cudart
 )
 
