@@ -1,18 +1,17 @@
 #include "fractals.hpp"
-
+#include <SFML/Graphics.hpp>
 
 Fractals::Fractals(uint32_t SAMPLES, uint32_t WIDTH, uint32_t HEIGHT)
-    : HEIGHT(HEIGHT), 
+    : MAX_ITERATIONS(SAMPLES),
       WIDTH(WIDTH), 
-      MAX_ITERATIONS(SAMPLES),
+      HEIGHT(HEIGHT), 
       min_Re(-2.5), 
       max_Re(1.0), 
       min_Im(-1.0), 
       max_Im(1.0),
       zoomFactor(1.0),
       deltaX(0.5),
-      deltaY(0.5),
-      palette(ColorPalette())
+      deltaY(0.5)
 {
     // Generate a gradient palette
     palette.generateGradientPalette();
@@ -43,10 +42,10 @@ void Fractals::calculateFractal(sf::Image &image)
 
                 for (; iterations < MAX_ITERATIONS; iterations++)
                 {
-                    z = pow(z, 2) + constant;
-
-                    if (std::norm(z) > 4)
+                    if (std::abs(z) > 2)
                         break;
+
+                    z = pow(z, 2) + constant;
                 }
 
                 // Black background for the fractal and dynamic colours
@@ -107,6 +106,7 @@ void Fractals::run()
     // window.draw(text);
 
     // Calculate and plot Fractal once
+    
     calculateFractal(image);
     texture.loadFromImage(image);
     sprite.setTexture(texture);
