@@ -36,7 +36,7 @@ int main(int argc, char **argv)
         else if (std::strcmp(argv[i], "-h") == 0 && i + 1 < argc)
             height = std::stoi(argv[++i]);
         
-        else if (std::strcmp(argv[i], "-h") == 0)
+        else if (std::strcmp(argv[i], "--help") == 0)
         {
             printHelp();
             return 0;
