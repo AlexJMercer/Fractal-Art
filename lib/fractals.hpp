@@ -14,43 +14,40 @@
 #include <random>
 #include <chrono>
 
-
 class Fractals
 {
 public:
-    Fractals(uint32_t SAMPLES, uint32_t WIDTH, uint32_t HEIGHT);
-    ~Fractals();
+  Fractals(uint32_t SAMPLES, uint32_t WIDTH, uint32_t HEIGHT);
+  ~Fractals();
 
-    void run();
-    void calculateFractal(sf::Image &);
+  void run();
+  void calculateFractal(sf::Image &);
 
-    // For CUDA
-    void calculateCUDA();
+  // For CUDA
+  void calculateCUDA();
 
 private:
-    ColorPalette palette;
+  ColorPalette palette;
 
-    uint32_t SAMPLES;
-    uint32_t WIDTH;
-    uint32_t HEIGHT;
+  uint32_t SAMPLES;
+  uint32_t WIDTH;
+  uint32_t HEIGHT;
 
-    uint32_t MAX_ITERATIONS;
+  uint32_t MAX_ITERATIONS;
 
-    // Initialize Multi-threading
-    const uint32_t numThreads = std::thread::hardware_concurrency();
-    std::vector<std::thread> threads;
-    const uint32_t rowsPerThread = HEIGHT / numThreads;
+  // Initialize Multi-threading
+  const uint32_t numThreads = std::thread::hardware_concurrency();
+  std::vector<std::thread> threads;
+  const uint32_t rowsPerThread = HEIGHT / numThreads;
 
+  // Variables for the Fractal rendering window
+  double min_Re;
+  double max_Re;
+  double min_Im;
+  double max_Im;
 
-    // Variables for the Fractal rendering window
-    double min_Re;
-    double max_Re;
-    double min_Im;
-    double max_Im;
-
-    // Properties for Pan, Zoom, Scroll
-    double zoomFactor;
-    double deltaX;
-    double deltaY;
+  // Properties for Pan, Zoom, Scroll
+  double zoomFactor;
+  double deltaX;
+  double deltaY;
 };
-

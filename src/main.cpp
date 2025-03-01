@@ -3,50 +3,53 @@
 
 #include "../lib/fractals.hpp"
 
-
-void printHelp() {
-    std::cout << "Usage: Fractals.exe [options]\n"
-              << "Options:\n"
-              << "  -i <samples>    Number of samples (default: 128)\n"
-              << "  -d <device>     Device to use (CPU or GPU, default: CPU)\n"
-              << "  -w <width>      Width of the image (default: 1920)\n"
-              << "  -h <height>     Height of the image (default: 1080)\n";
+void printHelp()
+{
+  std::cout << "Usage: Fractals.exe [options]\n"
+            << "Options:\n"
+            << "  -i <samples>    Number of samples (default: 128)\n"
+            << "  -d <device>     Device to use (CPU or GPU, default: CPU)\n"
+            << "  -w <width>      Width of the image (default: 1920)\n"
+            << "  -h <height>     Height of the image (default: 1080)\n";
 }
 
 int main(int argc, char **argv)
 {
-    uint32_t width = 1920;  // Default width
-    uint32_t height = 1080; // Default height
-    uint32_t samples = 128; // Default samples
-    std::string device = "CPU"; // Default device
+  uint32_t width = 1920;      // Default width
+  uint32_t height = 1080;     // Default height
+  uint32_t samples = 128;     // Default samples
+  std::string device = "CPU"; // Default device
 
-    for (int i = 1; i < argc; ++i) 
+  for (int i = 1; i < argc; ++i)
+  {
+    if (std::strcmp(argv[i], "-i") == 0 && i + 1 < argc)
+      samples = std::stoi(argv[++i]);
+
+    else if (std::strcmp(argv[i], "-d") == 0 && i + 1 < argc)
+      device = argv[++i];
+
+    else if (std::strcmp(argv[i], "-w") == 0 && i + 1 < argc)
+      width = std::stoi(argv[++i]);
+
+    else if (std::strcmp(argv[i], "-h") == 0 && i + 1 < argc)
+      height = std::stoi(argv[++i]);
+    else
     {
-        if (std::strcmp(argv[i], "-i") == 0 && i + 1 < argc)
-            samples = std::stoi(argv[++i]);
-        
-        else if (std::strcmp(argv[i], "-d") == 0 && i + 1 < argc)
-            device = argv[++i];
-        
-        else if (std::strcmp(argv[i], "-w") == 0 && i + 1 < argc)
-            width = std::stoi(argv[++i]);
-        
-        else if (std::strcmp(argv[i], "-h") == 0 && i + 1 < argc)
-            height = std::stoi(argv[++i]);
-        else
-        {
-            printHelp();
-            return 0;
-        }
+      printHelp();
+      return 0;
     }
+  }
 
-    Fractals fractal(samples, width, height);
+  Fractals fractal(samples, width, height);
 
-    if (device == "CPU") {
-        fractal.run();
-    } else {
-        fractal.calculateCUDA();
-    }
-    
-    return 0;
+  if (device == "CPU")
+  {
+    fractal.run();
+  }
+  else
+  {
+    fractal.calculateCUDA();
+  }
+
+  return 0;
 }

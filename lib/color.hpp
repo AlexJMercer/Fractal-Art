@@ -6,16 +6,15 @@
 #include <vector>
 #include <random>
 
-class ColorPalette {
+class ColorPalette
+{
 public:
+  std::vector<sf::Color> colors;
 
-    std::vector<sf::Color> colors;
+  ColorPalette();
 
-    ColorPalette();
+  const sf::Color &getColor(std::size_t index) const;
+  void generateRandomPalette();
 
-    const sf::Color& getColor(std::size_t index) const;
-    void generateRandomPalette();
-
-    void generateGradientPalette();
+  void generateGradientPalette();
 };
-
