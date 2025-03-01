@@ -15,7 +15,7 @@ set(SFML_DIR "C:/SFML-2.6.2/lib/cmake/SFML")
 find_package(SFML 2.5 COMPONENTS system window graphics audio network REQUIRED)
 
 # Set executables
-set(SOURCE_FILES main.cpp color.cpp fractals.cpp fractalCUDA.cu)
+file(GLOB SOURCE_FILES src/*.cpp src/*.cu)
 
 # Add executable
 add_executable(Fractals ${SOURCE_FILES})

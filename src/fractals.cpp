@@ -1,4 +1,4 @@
-#include "fractals.hpp"
+#include "../lib/fractals.hpp"
 #include <SFML/Graphics.hpp>
 
 Fractals::Fractals(uint32_t SAMPLES, uint32_t WIDTH, uint32_t HEIGHT)
@@ -113,7 +113,7 @@ void Fractals::run()
 
     // Save the fractal to a file
     srand(time(0));
-    std::string filename = "E:/Fractals/imgs/fractal_" + std::to_string(rand()) + "_" + std::to_string(MAX_ITERATIONS) + ".jpg";
+    std::string filename = "E:/Fractals/data/fractal_" + std::to_string(rand()) + "_" + std::to_string(MAX_ITERATIONS) + ".jpg";
 
     // Display the fractal in the window
     while (window.isOpen())

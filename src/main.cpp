@@ -1,18 +1,16 @@
 #include <iostream>
 #include <string>
-// #include <cstring>
 
-#include "fractals.hpp"
+#include "../lib/fractals.hpp"
 
 
 void printHelp() {
     std::cout << "Usage: Fractals.exe [options]\n"
               << "Options:\n"
               << "  -i <samples>    Number of samples (default: 128)\n"
-              << "  -d <device>     Device to use (CPU or CUDA, default: CUDA)\n"
+              << "  -d <device>     Device to use (CPU or GPU, default: CPU)\n"
               << "  -w <width>      Width of the image (default: 1920)\n"
-              << "  -h <height>     Height of the image (default: 1080)\n"
-              << "  -h              Show this help message\n";
+              << "  -h <height>     Height of the image (default: 1080)\n";
 }
 
 int main(int argc, char **argv)
@@ -35,8 +33,7 @@ int main(int argc, char **argv)
         
         else if (std::strcmp(argv[i], "-h") == 0 && i + 1 < argc)
             height = std::stoi(argv[++i]);
-        
-        else if (std::strcmp(argv[i], "--help") == 0)
+        else
         {
             printHelp();
             return 0;

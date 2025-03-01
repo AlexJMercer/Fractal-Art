@@ -1,4 +1,4 @@
-#include "fractals.hpp"
+#include "../lib/fractals.hpp"
 
 #include <SFML/Graphics.hpp>
 
