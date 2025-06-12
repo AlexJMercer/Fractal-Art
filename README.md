@@ -38,14 +38,13 @@ To build and run the project, follow these steps:
 2. **Build from CMakeLists**:
     ```sh
     mkdir build
-    cd build
-    cmake ..
-    mingw32-make        # Since I'm using MinGW compiler
+    cmake -S . -B build -G "Visual Studio 17 2022"
+    cmake --build build --config Release
     ```
 
 3. **Run the application**:
     ```sh
-    Fractals.exe
+    build\Release\Fractals.exe -i <iterations> -d <CPU/GPU> -w <width> -h <height>
     ```
 
 Or, you can simply run the `run.bat` file from the root folder.
